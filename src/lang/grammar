@@ -1,0 +1,7 @@
+program = block '.'
+block = ['CONST' $initConst$ident '=' $setConst$num {',' $initConst$ident '=' $setConst$num} ';'] ['VAR' $initVar$ident {',' $initVar$ident} ';'] {'PROCEDURE' $initProc$ident ';' block $endProc$';'} stmt
+stmt = [ $assignStart$ident ':=' expr $assignEnd$% | 'CALL' $callProc$ident | '?' $input$ident | '!' expr $output$% | 'BEGIN' stmt {';' stmt} 'END' | 'IF' cond $ifCond$'THEN' stmt $ifStmt$% | 'WHILE' $whileCond$% cond $whileStart$'DO' stmt $whileEnd$% ]
+cond = 'ODD' $condOdd$expr | expr ('=' expr $condEq$% | '#' expr $condNe$% | '<' expr $condLt$% | '<=' expr $condLe$% | '>' expr $condGt$% | '>=' expr $condGe$%)
+expr = (['+'] term | '-' term $exprNegate$% ) {'+' term $exprAdd$% | '-' term $exprSub$% }
+term = factor {'*' factor $termMul$% |'/' factor $termDiv$% }
+factor = $factorIdent$ident | $factorNum$num | '(' expr ')'

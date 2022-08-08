@@ -1,0 +1,23 @@
+const c=10;
+var i;
+procedure p;
+var j;
+begin 
+  while i<c do 
+  begin
+    j:=0; 
+    while j<i do
+    begin
+      if i>j+2 then 
+        !1+(i*j);
+      !i;
+      j:=j+1
+    end;
+    i:=i+1
+  end 
+end;
+begin 
+  ?i;
+  call p;
+  !i
+end.
